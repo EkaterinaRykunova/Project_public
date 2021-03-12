@@ -1,0 +1,29 @@
+def bubsort(array):
+    for i in range(len(array)):
+        for j in range(len(array) - i - 1):
+            if array[j] > array[j + 1]:
+                array[j], array[j + 1] = array[j + 1], array[j]
+    return array
+
+def binary_search(array, element, left, right):
+    if element <= array[0]:
+        return (0, print('the input number is smaller than range values'))
+    if element > array[len(array)-1]:
+        return (len(array)-1, print('the input number is bigger than range values'))
+    middle = (right + left) // 2
+    if element == array[middle] and element > array[middle - 1]:
+        return (middle - 1, middle)
+    elif element < array[middle]:
+        if element > array[middle - 1]:
+            return (middle - 1, middle)
+        else:
+            return binary_search(array, element, left, middle - 1)
+    else:
+        return binary_search(array, element, middle + 1, right)
+
+array = list(map(int, input('enter the set of numbers diveded by space').split()))
+element = int(input('enter the number'))
+array = bubsort(array)
+
+print(array)
+print(binary_search(array, element, 0, len(array) - 1))
